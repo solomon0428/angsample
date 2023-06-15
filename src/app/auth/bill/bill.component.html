@@ -1,0 +1,57 @@
+<p>bill works!</p>
+<button type="button" (click)="isVisible = true">Show</button>
+<button type="button" (click)="isVisible = false">Hide</button>
+<div *ngIf="isVisible">
+    <table>
+        <tr>
+            <th>Prod Id</th>
+            <th>Prod Name</th>
+            <th>Price</th>
+            <th>Count</th>
+            <th>Total</th>
+        </tr>
+        <tr *ngFor="let product of products"> 
+            <td>{{product.id}}</td>
+            <td>{{product.name}}</td>
+            <td>{{product.price}}</td>
+            <td>{{product.count}}</td>
+            <td>{{product.total}}</td>
+        </tr>
+    </table>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col">Prod ID</div>
+        <div class="col">Prod Name</div>
+        <div class="col">Price</div>
+        <div class="col">Count</div>
+        <div class="col">Total</div>
+        <div class="col">Action</div>
+    </div>
+    
+    <div>
+        {{currProduct | json}}
+    </div>
+    <div *ngIf="products">
+        <div class="row mt-4" *ngFor="let product of products">
+            <div class="col">{{product.id}}</div>
+            <div class="col">{{product.name}}</div>
+            <div class="col">{{product.price}}</div>
+            <div class="col">{{product.count}}</div>
+            <div class="col">{{product.total}}</div>
+            <div class="col">
+                <button type="button" class="btn btn-warning" (click)="updateProduct(product.id)">Update</button>
+                <span class="p-2"></span>
+                <button type="button" class="btn btn-danger" (click)="deleteProduct(product.id)">Delete</button>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col"><input type="text" name="pId" id="pId" class="form-control" [(ngModel)]="currProduct.id"/></div>
+        <div class="col"><input type="text" name="pName" id="pName" class="form-control" [(ngModel)]="currProduct.name"/></div>
+        <div class="col"><input type="text" name="pPrice" id="pPrice" class="form-control" [(ngModel)]="currProduct.price" (keyup)="calcTotal()"/></div>
+        <div class="col"><input type="text" name="pCount" id="pCount" class="form-control" [(ngModel)]="currProduct.count" (keyup)="calcTotal()"/></div>
+        <div class="col"><input type="text" name="pTotal" id="pTotal" class="form-control" [(ngModel)]="currProduct.total" readonly/></div>
+        <div class="col"><button type="button" class="btn btn-success" (click)="addProduct()">Add</button></div>
+    </div>
+</div>
